@@ -1,0 +1,377 @@
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
+## CWM config file for Archcraft
+
+## General ---------------------------------------------------#
+
+## Automatically add new windows to group if their class property matches `windowclass`, or if their
+## name and class properties match `windowname` and `windowclass`, respectively. The more specific last
+## match wins. group is a number between 0 and 9. If group is 0, matching windows will not be
+## added to any group; this may be used to override “sticky group mode”.
+##
+## The name and class values, respectively, for existing windows are both set in the WM_CLASS prop‐
+## erty and may be obtained using `xprop`
+##
+## autogroup group [windowname,]windowclass
+autogroup 1 "Alacritty,Alacritty"
+autogroup 2 "firefox"
+autogroup 3 "thunar,Thunar"
+autogroup 4 "geany,Geany"
+
+## Set the window border width to pixels.
+borderwidth 3
+
+## Set the color of the active border.
+color activeborder "#5294E2"
+
+## Set menu font color.
+color font "#FAFAFA"
+
+## Set font color for selected menu item.
+color selfont "#FAFAFA"
+
+## Set the color of the border while grouping a window.
+color groupborder "#52E25F"
+
+## Set the color of the inactive border.
+color inactiveborder "#434853"
+
+## Set menu background color.
+color menubg "#2F343F"
+
+## Set menu foreground color.
+color menufg "#5294E2"
+               
+## Set the color of the border of a window indicating urgency.
+color urgencyborder "#E25261"
+
+## Set the color of the border while ungrouping a window.
+color ungroupborder "#DA52E2"
+
+## Every `name` entry is shown in the application menu. When selected, the defined `path` is executed
+## with execvp
+##
+## The name entries `term` and `lock` have a special meaning. They point to  the 'terminal' and 'screen
+## locking' programs specified by key bindings. The defaults are `xterm` and `xlock`, respectively.
+##
+## command name path
+command Terminal       cwm_term
+command "File Manager" thunar
+command "Web Browser"  firefox
+command "Text Editor"  geany
+
+## Set default Xft(3) font
+fontname "JetBrainsMono:pixelsize=14:medium"
+
+## Define a “gap” in pixels at the edge of the screen, so that when a window is  maximized  it  will
+## not overlap this area. This “gap” can be used for applications such as `xclock`, where the user
+## may wish to remain visible.
+##
+## gap top bottom left right
+gap 45 10 10 10
+
+## Set the percentage of screen the master window should occupy after calling `window-htile`. If set
+## to 0, the horizontal size of the master window will remain unchanged. The default is 50.
+##
+## htile percent
+htile 50
+
+## Set the percentage of screen the master window should occupy after calling `window-vtile`. If set
+## to 0, the vertical size of the master window will remain unchanged. The default is 50.
+##
+## vtile percent
+vtile 50
+
+## Ignore, and do not warp to, windows with the name `windowname` when drawing borders and cycling
+## through windows.
+##
+## ignore windowname
+ignore polybar
+ignore rofi
+
+## Set a default size for the keyboard movement bindings, in pixels. The default is 1.
+##
+## moveamount pixels
+moveamount 10
+
+## Minimum distance to snap-to adjacent edge, in pixels. The default is 0.
+##
+## snapdist pixels
+snapdist 10
+
+## Toggle sticky group mode. The default behavior for new windows is to not assign any group. By
+## enabling sticky group mode, `cwm` will assign new windows to the currently selected group.
+## sticky yes|no
+sticky yes
+
+## Unbind function bound to key. A special key keyword “all” can be used to unbind all keys.
+##
+## unbind-key key
+unbind-key all
+
+## Unbind function bound to button. A special button keyword “all” can be used to unbind all buttons.
+##
+## unbind-mouse button
+unbind-mouse all
+
+## Every `name` entry is shown in the wm menu. When selected, the window manager is replaced by path.
+##
+## wm name path
+wm Openbox /usr/bin/openbox
+wm Bspwm /usr/bin/bspwm
+
+## Key Bindings ---------------------------------------------------#
+##
+## Bind or rebind key `key` to `function`. The modifier keys come first, followed by a ‘-’,
+## then a keysym name, taken from /usr/X11R6/include/X11/keysymdef.h
+## 
+## The following modifiers are recognised:
+## 
+##       C       Control key.
+##       M       Meta key.
+##       S       Shift key.
+##       4       Mod4 (windows) key.
+##       5       Mod5 (AltGr) key.
+## 
+## The function may either be one from the “BIND FUNCTION LIST” or the command
+## line that is to be executed.
+##
+## bind-key key function
+
+## Hardware Keys --
+bind-key XF86AudioMute          "cwm_volume --toggle"
+bind-key XF86AudioMicMute       "cwm_volume --toggle-mic"
+bind-key XF86AudioLowerVolume   "cwm_volume --dec"
+bind-key XF86AudioRaiseVolume   "cwm_volume --inc"
+bind-key XF86MonBrightnessDown  "cwm_brightness --dec"
+bind-key XF86MonBrightnessUp    "cwm_brightness --inc"
+
+## Print Keys --
+bind-key Print          "cwm_screenshot --now"
+bind-key 4-Print        "cwm_screenshot --area"
+bind-key C-Print        "cwm_screenshot --win"
+bind-key M-Print        "cwm_screenshot --in5"
+bind-key S-Print        "cwm_screenshot --in10"
+
+## Terminal --
+bind-key 4-Return       cwm_term
+bind-key 4S-Return      "cwm_term --full"
+
+## Apps --
+bind-key 4-f            thunar
+bind-key 4-e            geany
+bind-key 4-w            firefox
+
+## Rofi --
+bind-key M-F1           rofi_launcher
+bind-key M-F2           rofi_runner
+bind-key 4-n            network_menu
+bind-key 4-r            rofi_asroot
+bind-key 4-b            rofi_bluetooth
+bind-key 4-m            rofi_music
+bind-key 4-x            rofi_powermenu
+bind-key 4-s            rofi_screenshot
+
+## Misc --
+bind-key 4-p            cwm_colorpicker
+bind-key MC-l           "betterlockscreen --lock"
+bind-key MC-m           cwm_music
+
+## CWM Session --
+bind-key 4C-q            quit
+bind-key 4C-r            restart
+
+## CWM Specific Functions --
+
+# Launch window search menu.
+bind-key MC-w            menu-window
+# Launch hidden window search menu.
+#bind-key MC-w            menu-window-hidden
+# Launch application search menu.
+bind-key MC-a            menu-cmd
+# Launch group search menu.
+bind-key MC-g            menu-group
+# Launch “exec program” menu.
+#bind-key MC-e            menu-exec
+# Launch “exec WindowManager” menu.
+#bind-key MC-e            menu-exec-wm
+# Launch “ssh” menu.
+#bind-key MC-s            menu-ssh
+
+# Toggle visibility of group n, where n is 1-9.
+bind-key 4M-1            group-toggle-1
+bind-key 4M-2            group-toggle-2
+bind-key 4M-3            group-toggle-3
+bind-key 4M-4            group-toggle-4
+bind-key 4M-5            group-toggle-5
+bind-key 4M-6            group-toggle-6
+bind-key 4M-7            group-toggle-7
+bind-key 4M-8            group-toggle-8
+bind-key 4M-9            group-toggle-9
+
+# Show only group n, where n is 1-9, hiding other groups.
+bind-key 4-1            group-only-1
+bind-key 4-2            group-only-2
+bind-key 4-3            group-only-3
+bind-key 4-4            group-only-4
+bind-key 4-5            group-only-5
+bind-key 4-6            group-only-6
+bind-key 4-7            group-only-7
+bind-key 4-8            group-only-8
+bind-key 4-9            group-only-9
+
+# Show only the previously active group.
+bind-key 4S-b            group-last
+
+# Close all windows in group n, where n is 1-9.
+bind-key 4C-1            group-close-1
+bind-key 4C-2            group-close-2
+bind-key 4C-3            group-close-3
+bind-key 4C-4            group-close-4
+bind-key 4C-5            group-close-5
+bind-key 4C-6            group-close-6
+bind-key 4C-7            group-close-7
+bind-key 4C-8            group-close-8
+bind-key 4C-9            group-close-9
+
+# Toggle visibility of all groups.
+bind-key 4S-a            group-toggle-all
+
+# Toggle group membership of current window.
+bind-key 4S-g            window-group
+
+# Hide current window from display and move to group n, where n is 1-9.
+bind-key 4S-1            window-movetogroup-1
+bind-key 4S-2            window-movetogroup-2
+bind-key 4S-3            window-movetogroup-3
+bind-key 4S-4            window-movetogroup-4
+bind-key 4S-5            window-movetogroup-5
+bind-key 4S-6            window-movetogroup-6
+bind-key 4S-7            window-movetogroup-7
+bind-key 4S-8            window-movetogroup-8
+bind-key 4S-9            window-movetogroup-9
+
+# Forward/Reverse cycle through groups.
+bind-key MC-Right        group-cycle
+bind-key MC-Left         group-rcycle
+
+# Forward/Reverse cycle through windows.
+bind-key 4-Tab           window-cycle
+bind-key 4S-Tab          window-rcycle
+
+# Forward/Reverse cycle through windows in current group.
+bind-key M-Tab           window-cycle-ingroup
+bind-key MS-Tab          window-rcycle-ingroup
+
+# Close current window.
+bind-key 4-c             window-close
+bind-key 4-q             window-close
+bind-key M-F4            window-close
+
+# Hide current window.
+bind-key 4-i          window-hide
+
+# Freeze current window geometry.
+bind-key 4-t          window-freeze
+
+# Label current window.
+bind-key 4S-r          window-menu-label
+
+# Stick current window to all groups (same as assigning to nogroup).
+bind-key 4-o          window-stick
+
+# Full-screen current window (gap + border removed).
+bind-key 4-space      window-fullscreen
+
+# Maximize current window (gap + border honored).
+bind-key 4S-space     window-maximize
+
+# Vertically maximize current window (gap + border honored).
+bind-key MC-v          window-vmaximize
+
+# Horizontally maximize current window (gap + border honored).
+bind-key MC-h          window-hmaximize
+
+# Current window is placed at the top of the screen, maximized horizontally 
+# and resized to htile (default half) of the vertical screen space.
+# Other windows in its group share remaining screen space.
+bind-key MCS-h         window-htile
+
+# Current window is placed on the left of the screen, maximized vertically
+# and resized to vtile (default half) of the horizontal screen space.
+# Other windows in its group share remaining screen space.
+bind-key MCS-v         window-vtile
+
+# Move window moveamount pixels directionally.
+bind-key 4S-Up        window-move-up
+bind-key 4S-Down      window-move-down
+bind-key 4S-Right     window-move-right
+bind-key 4S-Left      window-move-left
+
+# Move window 10 times moveamount pixels directionally.
+bind-key 4S-k         window-move-up-big
+bind-key 4S-j         window-move-down-big
+bind-key 4S-l         window-move-right-big
+bind-key 4S-h         window-move-left-big
+
+# Resize window moveamount pixels directionally.
+bind-key 4C-Up        window-resize-up
+bind-key 4C-Down      window-resize-down
+bind-key 4C-Right     window-resize-right
+bind-key 4C-Left      window-resize-left
+
+# Resize window 10 times moveamount pixels directionally.
+bind-key 4C-k         window-resize-up-big
+bind-key 4C-j         window-resize-down-big
+bind-key 4C-l         window-resize-right-big
+bind-key 4C-h         window-resize-left-big
+
+# Snap window to the screen edges.
+bind-key 4-Up        window-snap-up
+bind-key 4-Down      window-snap-down
+bind-key 4-Right     window-snap-right
+bind-key 4-Left      window-snap-left
+
+bind-key 4-k        window-snap-up-right
+bind-key 4-j        window-snap-down-left
+bind-key 4-l        window-snap-down-right
+bind-key 4-h        window-snap-up-left
+
+## Mouse Bindings -------------------------------------------------#
+##
+## Bind or rebind button `button` to `function`. The modifier keys come first, followed by a
+## ‘-’, then the button number.
+## 
+## The same modifiers are recognised as for key in bind-key.
+## 
+## The following buttons are recognised:
+## 
+##       1       Left mouse button.
+##       2       Middle mouse button.
+##       3       Right mouse button.
+##       4       Scroll up mouse button.
+##       5       Scroll down mouse button.
+## 
+## The function may be taken from the “BIND FUNCTION LIST” or the command line
+## that is to be executed.
+##
+## bind-mouse button function
+
+# Raise current window.
+bind-mouse M-1          window-raise
+# Lower current window.
+bind-mouse M-3          window-lower
+# Hide current window.
+bind-mouse M-2          window-hide
+# Move current window.
+bind-mouse 4-1          window-move
+# Resize current window.
+bind-mouse 4-3          window-resize
+# Freeze current window geometry.
+bind-mouse 4-2          window-freeze
+# Launch window search menu.
+bind-mouse 1            menu-window
+# Launch group search menu.
+bind-mouse 2            menu-group
+# Launch application search menu.
+bind-mouse 3            menu-cmd

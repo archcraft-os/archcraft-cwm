@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2023 Aditya Shakya <adi1090x@gmail.com>
+##
+## Autostart Programs
+
+# cwm dir
+cdir="$HOME/.cwm"
+
+# export path for cwm scripts
+export PATH=$PATH:$cdir/scripts
+
+# Kill already running process
+_ps=(xsettingsd ksuperkey)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Lauch xsettingsd daemon
+xsettingsd --config="$cdir"/xsettingsd &
+
+# polkit agent
+if [[ ! `pidof xfce-polkit` ]]; then
+	/usr/lib/xfce-polkit/xfce-polkit &
+fi
+
+# Enable power management
+xfce4-power-manager &
+
+# Enable Super Keys For Menu
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+# Fix cursor
+xsetroot -cursor_name left_ptr
+
+# Restore wallpaper
+hsetroot -root -cover "$cdir"/theme/wallpaper
+
+# Lauch notification daemon
+"$cdir"/scripts/cwm_dunst
+
+# Lauch polybar
+"$cdir"/scripts/cwm_bar
+
+# Lauch compositor
+"$cdir"/scripts/cwm_comp
+
+# Start mpd
+exec mpd &
+
+# Start cwm window manager
+/usr/bin/cwm
