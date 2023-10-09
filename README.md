@@ -1,2 +1,2 @@
 # archcraft-cwm
- // Configuration : cwm
+ // Configuration : CWM

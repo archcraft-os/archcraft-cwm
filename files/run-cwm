@@ -37,7 +37,7 @@ ksuperkey -e 'Super_R=Alt_L|F1' &
 xsetroot -cursor_name left_ptr
 
 # Restore wallpaper
-hsetroot -root -cover "$cdir"/theme/wallpaper
+hsetroot -cover "$cdir"/theme/wallpaper
 
 # Lauch notification daemon
 "$cdir"/scripts/cwm_dunst

@@ -10,4 +10,4 @@ Target = cwm
 [Action]
 Description = Modifying CWM Desktop file...
 When = PostTransaction
-Exec = /usr/bin/sed -i -e 's|Exec=.*|Exec=/usr/local/bin/run-cwm|g' /usr/share/xsessions/cwm.desktop
+Exec = /usr/bin/sed -i -e 's|Exec=.*|Exec=/usr/bin/run-cwm|g' /usr/share/xsessions/cwm.desktop
