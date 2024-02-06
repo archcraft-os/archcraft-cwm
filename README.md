@@ -1,2 +1,1 @@
-# archcraft-cwm
- // Configuration : CWM
+**Documentation** : [CWM](https://wiki.archcraft.io/docs/window-managers/stacking-wm/cwm)
