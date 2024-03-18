@@ -7,6 +7,9 @@
 # cwm dir
 cdir="$HOME/.cwm"
 
+# Export desktop session
+export XDG_CURRENT_DESKTOP='cwm'
+
 # export path for cwm scripts
 export PATH=$PATH:$cdir/scripts
 
