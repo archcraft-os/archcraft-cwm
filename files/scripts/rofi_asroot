@@ -10,7 +10,7 @@ ASROOT="$DIR/scripts/cwm_asroot"
 # Theme Elements
 prompt='Root'
 mesg="Run Applications As Root"
-term='alacritty --class alacritty-float,alacritty-float --config-file $HOME/.cwm/alacritty/alacritty.toml'
+term='alacritty --class alacritty-float,alacritty-float --config-file /root/.cwm/alacritty/alacritty.toml'
 
 # Options
 layout=`cat ${RASI} | grep 'USE_ICON' | cut -d'=' -f2`
