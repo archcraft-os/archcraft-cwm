@@ -2,7 +2,7 @@
 
 pkgname=archcraft-cwm
 pkgver=2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="CWM Configurations for Archcraft"
 arch=('any')
 url="https://github.com/archcraft-os/archcraft-cwm"
