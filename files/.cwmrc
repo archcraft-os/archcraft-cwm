@@ -153,9 +153,12 @@ bind-key C-Print        "cwm_screenshot --win"
 bind-key M-Print        "cwm_screenshot --in5"
 bind-key S-Print        "cwm_screenshot --in10"
 
-## Terminal --
+## Terminal : alacritty --
 bind-key 4-Return       cwm_term
 bind-key 4S-Return      "cwm_term --full"
+
+## Terminal : kitty --
+bind-key MC-t       	cwm_kitty
 
 ## Apps --
 bind-key 4-f            thunar
